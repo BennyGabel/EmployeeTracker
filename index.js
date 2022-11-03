@@ -104,13 +104,10 @@ function addRoles() {
             type: 'input',
             name: 'department',
             message: 'What is the department?'
-        },
-
-        id             INTEGER AUTO_INCREMENT PRIMARY KEY,
-        title          VARCHAR(30),
-        salary         DECIMAL,
-        department_id  INTEGER NOT NULL,
-        CONSTRAINT fk_dept FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE
+        }
+    ]).then(data => {
+        insertRole(data)
+    })
     }
 
 function addDepartment() {
