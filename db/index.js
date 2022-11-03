@@ -22,9 +22,20 @@ function getAllDepartment() {
 
 function insertEmployee(employee) {
     return connection.promise().query(
-        `INSERT INTO employee SET ${employee}  `
+        "INSERT INTO employee SET ?",employee
     )
 }
 
+function insertRole(role) {
+    return connection.promise().query(
+        "INSERT INTO role SET ?",role
+    )
+}
+
+function insertDepartment(department) {
+    return connection.promise().query(
+        "INSERT INTO department SET ?",department
+    )
+} 
 // If am exporting more than one fuction, HAVE to WRAP IT as OBJECTS
-module.exports = {getAllEmployees, getAllRoles, getAllDepartment}
+module.exports = {getAllEmployees, getAllRoles, getAllDepartment, insertEmployee, insertRole, insertDepartment}
