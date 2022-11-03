@@ -18,7 +18,7 @@ const { getAllEmployees, getAllDepartment, getAllRoles, insertEmployee, insertRo
 //just for inquirer
 
 async function menuOption() {
-    inquirer.prompt([{
+    await inquirer.prompt([{
         type: 'list',
         name: 'myList',
         message: 'What do you want to do',
@@ -38,7 +38,7 @@ async function menuOption() {
             case 'Add Employee':
                 addEmployee()
                 break
-            case 'AddRoles':
+            case 'Add Roles':
                 addRoles()
                 break
             case 'Add Departmensts':
