@@ -22,16 +22,17 @@ function start() {
         type: 'list',
         name: 'myList',
         message: 'What do you want to do',
-        choices: ['View All Employees', 'View All Roles', 'View All Departmensts', 'Add Employee', 'Add Roles', 'Add Departmensts']
+        choices: ['View All Employees', 'View All Roles', 'View All Departmens', 'Add Employee', 'Add Roles', 'Add Departmensts']
     }]).then(data => {
         switch (data) {
             case 'View All Employees':
                 viewEmployees()
                 break
             case 'View All Roles':
+                viewRoles()
                 break
             case 'View All Departmensts':
-                break
+                viewDepartments()
             case 'Add Employee':
                 addEmployee()
                 break
@@ -50,7 +51,14 @@ function start() {
 
 function viewEmployees() {
     getAllEmployees().then((data) => { console.log(data) })
+}
 
+function viewRoles() {
+    getAllRoles().then((data) => { console.log(data) })
+}
+
+function viewDepartments() {
+    getAllDepartment().then((data) => { console.log(data) })
 }
 
 function addEmployee() {
@@ -80,9 +88,43 @@ function addEmployee() {
     })
 }
 
+function addRoles() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'title',
+            message: 'What is the first name?'
+        },
+        {
+            type: 'input',
+            name: 'salary',
+            message: 'What is the salary?'
+        },
+        {
+            type: 'input',
+            name: 'department',
+            message: 'What is the department?'
+        },
 
+        id             INTEGER AUTO_INCREMENT PRIMARY KEY,
+        title          VARCHAR(30),
+        salary         DECIMAL,
+        department_id  INTEGER NOT NULL,
+        CONSTRAINT fk_dept FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE
+    }
 
+function addDepartment() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'department',
+            message: 'Enter the department?'
+        }
+    ]).then(data => {
+        insertDepartment(data)
+    })
 
+}
 
 start()
 
