@@ -17,13 +17,14 @@ const { getAllEmployees, getAllDepartment, getAllRoles, insertEmployee, insertRo
 
 //just for inquirer
 
-function start() {
+async function menuOption() {
     inquirer.prompt([{
         type: 'list',
         name: 'myList',
         message: 'What do you want to do',
-        choices: ['View All Employees', 'View All Roles', 'View All Departmens', 'Add Employee', 'Add Roles', 'Add Departmensts']
+        choices: ['View All Employees', 'View All Roles', 'View All Departmens', 'Add Employee', 'Add Roles', 'Add Departmensts', 'Quit']
     }]).then(data => {
+        console.log("** " + data + " **")
         switch (data) {
             case 'View All Employees':
                 viewEmployees()
@@ -42,6 +43,8 @@ function start() {
             case 'Add Departmensts':
                 addDepartment()
                 break
+            case 'Quit':
+                // Do Nothing
 
 
 
@@ -50,15 +53,15 @@ function start() {
 }
 
 function viewEmployees() {
-    getAllEmployees().then((data) => { console.log(data) })
+    getAllEmployees().then((data) => { console.log(data) }).then( ()=>menuOption )
 }
 
 function viewRoles() {
-    getAllRoles().then((data) => { console.log(data) })
+    getAllRoles().then((data) => { console.log(data) }).then( ()=>menuOption )
 }
 
 function viewDepartments() {
-    getAllDepartment().then((data) => { console.log(data) })
+    getAllDepartment().then((data) => { console.log(data) }).then( ()=>menuOption )
 }
 
 function addEmployee() {
@@ -85,7 +88,7 @@ function addEmployee() {
         }
     ]).then(data => {
         insertEmployee(data)
-    })
+    }).then( ()=>menuOption )
 }
 
 function addRoles() {
@@ -107,7 +110,7 @@ function addRoles() {
         }
     ]).then(data => {
         insertRole(data)
-    })
+    }).then( ()=>menuOption )
     }
 
 function addDepartment() {
@@ -119,11 +122,11 @@ function addDepartment() {
         }
     ]).then(data => {
         insertDepartment(data)
-    })
+    }).then( ()=>menuOption )
 
 }
 
-start()
+menuOption()
 
 
 
