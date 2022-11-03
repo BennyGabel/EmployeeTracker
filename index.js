@@ -23,7 +23,8 @@ async function menuOption() {
         name: 'myList',
         message: 'What do you want to do',
         choices: ['View All Employees', 'View All Roles', 'View All Departmens', 'Add Employee', 'Add Roles', 'Add Departmensts', 'Quit']
-    }]).then(data => {
+        }
+    ]).then(data => {
         console.log("** " + data + " **")
         switch (data) {
             case 'View All Employees':
@@ -45,9 +46,6 @@ async function menuOption() {
                 break
             case 'Quit':
                 // Do Nothing
-
-
-
         }
     })
 }
