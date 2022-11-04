@@ -3,18 +3,23 @@ const connection = require('./connection')
 
 
 function getAllEmployees() {
+    console.log("db/index   getAllEmployees")
     return connection.promise().query(
         "SELECT * FROM employee "
     )
 }
 
 function getAllRoles() {
+    // console.log("db/index   getAllRoles")
+    // console.log(connection);
+    
     return connection.promise().query(
-        "SELECT * FROM role "
+        "SELECT role.id, role.title, role.salary FROM role;"
     )
 }
 
 function getAllDepartment() {
+    console.log("db/index   getAllDepartment")
     return connection.promise().query(
         "SELECT * FROM department "
     )

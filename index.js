@@ -1,5 +1,5 @@
 const fs = require('fs');
-
+const db = require("./db");
 const inquirer = require('inquirer');
 
 // Old Sintax
@@ -17,20 +17,22 @@ const { getAllEmployees, getAllDepartment, getAllRoles, insertEmployee, insertRo
 
 //just for inquirer
 
-async function menuOption() {
-    await inquirer.prompt([{
+function menuOption() {
+    inquirer.prompt([{
         type: 'list',
         name: 'myList',
         message: 'What do you want to do',
         choices: ['View All Employees', 'View All Roles', 'View All Departmens', 'Add Employee', 'Add Roles', 'Add Departmensts', 'Quit']
         }
     ]).then(data => {
-        console.log("** " + data + " **")
-        switch (data) {
+        let choice = data.myList
+        // console.log("** " + data + " **")
+        switch (choice) {
             case 'View All Employees':
                 viewEmployees()
                 break
             case 'View All Roles':
+                console.log('hi')
                 viewRoles()
                 break
             case 'View All Departmensts':
@@ -51,11 +53,19 @@ async function menuOption() {
 }
 
 function viewEmployees() {
-    getAllEmployees().then((data) => { console.log(data) }).then( ()=>menuOption )
+    // getAllEmployees().then((data) => { console.log(data) }).then( ()=>menuOption() )
+    getAllEmployees().then((data) => { console.log(data) })
 }
 
 function viewRoles() {
-    getAllRoles().then((data) => { console.log(data) }).then( ()=>menuOption )
+    console.log('hi')
+    // db.getAllRoles().then((data) => { console.log(data) }).then( ()=>menuOption )
+    db.getAllRoles()
+        .then(([data]) => { 
+            let roles = data; 
+            console.table(roles);
+        })
+        .then( ()=>menuOption )
 }
 
 function viewDepartments() {
@@ -119,6 +129,7 @@ function addDepartment() {
             message: 'Enter the department?'
         }
     ]).then(data => {
+        
         insertDepartment(data)
     }).then( ()=>menuOption )
 
