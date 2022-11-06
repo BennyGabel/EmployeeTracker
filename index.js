@@ -60,7 +60,7 @@ function menuOption() {
 
 function viewEmployees() {
     // getAllEmployees().then((data) => { console.log(data) }).then( ()=>menuOption() )
-    getAllEmployees().then((data) => { console.log(data) })
+    // getAllEmployees().then((data) => { console.log(data) })
     db.getAllEmployees()
         .then(([data]) => { 
             let employee = data;
@@ -147,7 +147,7 @@ function addDepartment() {
     inquirer.prompt([
         {
             type: 'input',
-            name: 'department',
+            name: 'name',
             message: 'Enter the department?'
         }
     ]).then(data => {

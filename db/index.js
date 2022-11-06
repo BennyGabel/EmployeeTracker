@@ -42,6 +42,7 @@ function insertDepartment(department) {
     console.log('new departmente')
     return connection.promise().query(
         "INSERT INTO department SET ?", department
+
     )
 }
 
