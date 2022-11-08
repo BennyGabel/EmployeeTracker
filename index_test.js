@@ -149,8 +149,18 @@ function qryRoles() {
         
             for (var result in results) {
                 if (results.hasOwnProperty(result)) {
-                  keys.push(result);
+
+                    console.log(results.hasOwnProperty(result))
+                    keys.push(results[id]);
                 }
+
+                // a = result[id]
+                // b = result[values]
+
+                // console.log("a",a, "b",b)
+                console.log("result",result)
+                console.log("keys",keys)
+
               }
 
               console.log(keys)
@@ -159,6 +169,9 @@ function qryRoles() {
               console.log("Object Values    ", Object.values(results))
               console.log("---------")
               console.log("Object Entries   ", Object.entries(results))
+
+              console.log("^^^ Array.from(<object> ^^^")
+              console.log(Array.from(results))
 
 
 
