@@ -10,9 +10,10 @@ const inquirer = require('inquirer');
 // const getDeptQry =  require('./db/index')
 
 // New Sintax. Option 1
+// const { getAllEmployees, getAllDepartment, getAllRoles, insertEmployee, insertRole, insertDepartment, vRole} = require('./db/index');
 const { getAllEmployees, getAllDepartment, getAllRoles, insertEmployee, insertRole, insertDepartment} = require('./db/index');
-const { exit } = require('process');
-const { end } = require('./db/connection');
+// const { exit } = require('process');
+// const { end } = require('./db/connection');
 
 // New Sintax. Option 2.... Will not work in old code
 // import { getAllEmployees, getAllRoles, getAllDepartment } from './db';   //     from './db'   means ./db/index
@@ -106,6 +107,13 @@ function addEmployee() {
             type: 'input',
             name: 'role_id',
             message: 'What is the role?'
+            // Wasn't able to get validation
+            // -------------------------------
+            // validate: role_valid => {
+            //           var cnkRoleId = db.vRole()
+            //           console.log (cnkRoleId)
+ 
+            // }
         },
         {
             type: 'input',

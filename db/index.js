@@ -32,19 +32,32 @@ function insertEmployee(employee) {
 }
 
 function insertRole(role) {
-    console.log('he he')
     return connection.promise().query(
         "INSERT INTO role SET ?", role
     )
 }
 
 function insertDepartment(department) {
-    console.log('new departmente')
+    // console.log('new departmente')
     return connection.promise().query(
         "INSERT INTO department SET ?", department
 
     )
 }
 
+// 22.11.06
+function vRole(nRole) {
+    //  console.log("db/index   vRole")
+    //  console.log("*** "+nRole)
+
+          return connection.promise().query(
+             "SELECT id FROM role WHERE id=" + nRole
+     )
+
+ }
+
+
+
 // If am exporting more than one fuction, HAVE to WRAP IT as OBJECTS
-module.exports = {getAllEmployees, getAllRoles, getAllDepartment, insertEmployee, insertRole, insertDepartment}
+module.exports = {getAllEmployees, getAllRoles, getAllDepartment, insertEmployee, insertRole, insertDepartment, vRole}
+// module.exports = {getAllEmployees, getAllRoles, getAllDepartment, insertEmployee, insertRole, insertDepartment}
