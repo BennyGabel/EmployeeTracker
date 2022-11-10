@@ -143,6 +143,7 @@ function qryRoles() {
         if (err) { 
             console.log('Error')
         } else {
+            /*
             console.log(results)
 
             var keys = []
@@ -161,7 +162,7 @@ function qryRoles() {
                 console.log("result",result)
                 console.log("keys",keys)
 
-              }
+            }
 
               console.log(keys)
               console.log("*********")
@@ -172,7 +173,7 @@ function qryRoles() {
 
               console.log("^^^ Array.from(<object> ^^^")
               console.log(Array.from(results))
-
+*/
 
 
 

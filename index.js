@@ -92,6 +92,14 @@ function viewDepartments() {
 }
 
 function addEmployee() {
+db.getAllRoles().then(([data]) => {
+    let roles = data
+    const roleChoices = roles.map(({id, title}) => ({
+        name: title,
+        value: id
+    }))
+    return roleChoices
+}).then(data => {
     inquirer.prompt([
         {
             type: 'input',
@@ -104,9 +112,10 @@ function addEmployee() {
             message: 'What is the last name?'
         },
         {
-            type: 'input',
+            type: 'list',
             name: 'role_id',
-            message: 'What is the role?'
+            message: 'What is the role?',
+            choices: data
             // Wasn't able to get validation
             // -------------------------------
             // validate: role_valid => {
@@ -123,6 +132,11 @@ function addEmployee() {
     ]).then(data => {
         insertEmployee(data)
     }).then( ()=>menuOption() )
+})
+
+
+
+    
 }
 
 function addRoles() {
