@@ -11,7 +11,7 @@ const inquirer = require('inquirer');
 
 // New Sintax. Option 1
 // const { getAllEmployees, getAllDepartment, getAllRoles, insertEmployee, insertRole, insertDepartment, vRole} = require('./db/index');
-const { getAllEmployees, getAllDepartment, getAllRoles, insertEmployee, insertRole, insertDepartment} = require('./db/index');
+const { getAllEmployees, getAllDepartment, getAllRoles, insertEmployee, insertRole, insertDepartment } = require('./db/index');
 // const { exit } = require('process');
 // const { end } = require('./db/connection');
 
@@ -27,7 +27,7 @@ function menuOption() {
         name: 'myList',
         message: 'What do you want to do',
         choices: ['View All Employees', 'View All Roles', 'View All Departments', 'Add Employee', 'Add Roles', 'Add Departmensts', 'Quit']
-        }
+    }
     ]).then(data => {
         let choice = data.myList
         console.log(choice)
@@ -63,34 +63,80 @@ function viewEmployees() {
     // getAllEmployees().then((data) => { console.log(data) }).then( ()=>menuOption() )
     // getAllEmployees().then((data) => { console.log(data) })
     db.getAllEmployees()
-        .then(([data]) => { 
+        .then(([data]) => {
             let employee = data;
             console.table(employee);
         })
-        .then( ()=>menuOption())
+        .then(() => menuOption())
 }
 
 function viewRoles() {
-        // db.getAllRoles().then((data) => { console.log(data) }).then( ()=>menuOption )
+    // db.getAllRoles().then((data) => { console.log(data) }).then( ()=>menuOption )
     db.getAllRoles()
-        .then(([data]) => { 
-            let roles = data; 
+        .then(([data]) => {
+            let roles = data;
             console.table(roles);
         })
-        .then( ()=>menuOption() )
+        .then(() => menuOption())
 }
 
 function viewDepartments() {
     // getAllDepartment().then((data) => { console.log(data) }).then( ()=>menuOption )
     db.getAllDepartment()
-        .then(([data]) => { 
+        .then(([data]) => {
             let department = data;
             // console.log(department); 
-            console.table(department); 
+            console.table(department);
         })
-        .then( ()=>menuOption() )
+        .then(() => menuOption())
 }
 
+// Working
+// Testing BEG
+// async/await
+function addEmployee() {
+    db.getAllRoles().then(([data]) => {
+        let roles = data;
+        const roleChoices = roles.map(({id, title}) => ({
+            name: title,
+            value: id
+        }))
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'first_name',
+                message: 'What is the first name?'
+            },
+            {
+                type: 'input',
+                name: 'last_name',
+                message: 'What is the last name?'
+            },
+            {
+                type: 'list',
+                name: 'role_id',
+                message: 'What is the role?',
+                choices: roleChoices
+            },
+            {
+                type: 'input',
+                name: 'manager_id',
+                message: 'What is the manager?',
+                default: 0 // null
+            }
+        ]).then(data => {
+            insertEmployee(data).then(() => menuOption())
+            
+        })
+    })
+}
+
+
+
+// Testing END
+//End of working
+
+/*
 function addEmployee() {
 db.getAllRoles().then(([data]) => {
     let roles = data
@@ -116,13 +162,6 @@ db.getAllRoles().then(([data]) => {
             name: 'role_id',
             message: 'What is the role?',
             choices: data
-            // Wasn't able to get validation
-            // -------------------------------
-            // validate: role_valid => {
-            //           var cnkRoleId = db.vRole()
-            //           console.log (cnkRoleId)
- 
-            // }
         },
         {
             type: 'input',
@@ -131,13 +170,13 @@ db.getAllRoles().then(([data]) => {
         }
     ]).then(data => {
         insertEmployee(data)
-    }).then( ()=>menuOption() )
-})
+    })
+    // }).then( ()=>menuOption() )
+}).then( ()=>menuOption() )
 
-
-
-    
 }
+*/
+
 
 function addRoles() {
     inquirer.prompt([
@@ -157,9 +196,8 @@ function addRoles() {
             message: 'What is the department?'
         }
     ]).then(data => {
-        console.log("Call insertRole")
         insertRole(data)
-    }).then( ()=>menuOption() )
+    }).then(() => menuOption())
 }
 
 
@@ -175,7 +213,7 @@ function addDepartment() {
     ]).then(data => {
         console.log("Call insertDepartment")
         insertDepartment(data)
-    }).then( ()=>menuOption() )
+    }).then(() => menuOption())
 
 }
 

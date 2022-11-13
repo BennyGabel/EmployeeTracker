@@ -129,8 +129,7 @@ function qryRoles() {
 
 
 /* With Parameter
-    // db.query(sql, params, (err, row) => {
-    //     if (err) {
+    // db.query(sql, params, (err, row) => {    //     if (err) {
 
     //     }
     //     console.log(row)
