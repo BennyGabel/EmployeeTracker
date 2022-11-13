@@ -21,8 +21,9 @@ function getAllRoles() {
 
 function getManagers() {
     return connection.promise().query(
-        "SELECT id, last_name from employee where manager_id=0;"
-        // "select first_name │ last_name │ role_id │ manager_id 
+        "select concat(last_name, ' ', first_name) as manager from employee where manager_id=0;" 
+        // "SELECT id, last_name from employee where manager_id=0;"
+        
     )
 }
 
