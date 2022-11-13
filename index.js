@@ -11,7 +11,7 @@ const inquirer = require('inquirer');
 
 // New Sintax. Option 1
 // const { getAllEmployees, getAllDepartment, getAllRoles, insertEmployee, insertRole, insertDepartment, vRole} = require('./db/index');
-const { getAllEmployees, getAllDepartment, getAllRoles, insertEmployee, insertRole, insertDepartment } = require('./db/index');
+const { getAllEmployees, getAllDepartment, getAllRoles, insertEmployee, insertRole, insertDepartment, getManagers } = require('./db/index');
 // const { exit } = require('process');
 // const { end } = require('./db/connection');
 
@@ -95,87 +95,53 @@ function viewDepartments() {
 // Testing BEG
 // async/await
 function addEmployee() {
-    db.getAllRoles().then(([data]) => {
-        let roles = data;
-        const roleChoices = roles.map(({id, title}) => ({
-            name: title,
-            value: id
-        }))
-        inquirer.prompt([
-            {
-                type: 'input',
-                name: 'first_name',
-                message: 'What is the first name?'
-            },
-            {
-                type: 'input',
-                name: 'last_name',
-                message: 'What is the last name?'
-            },
-            {
-                type: 'list',
-                name: 'role_id',
-                message: 'What is the role?',
-                choices: roleChoices
-            },
-            {
-                type: 'input',
-                name: 'manager_id',
-                message: 'What is the manager?',
-                default: 0 // null
-            }
-        ]).then(data => {
-            insertEmployee(data).then(() => menuOption())
-            
-        })
-    })
-}
-
-
-
-// Testing END
-//End of working
-
-/*
-function addEmployee() {
-db.getAllRoles().then(([data]) => {
-    let roles = data
-    const roleChoices = roles.map(({id, title}) => ({
-        name: title,
+    db.getManagers().then(([aryMan]) => {
+        let manager = aryMan;
+        const mngrChoices = manager.map(({id, last_name}) => ({
+        name: last_name,
         value: id
     }))
-    return roleChoices
-}).then(data => {
-    inquirer.prompt([
-        {
-            type: 'input',
-            name: 'first_name',
-            message: 'What is the first name?'
-        },
-        {
-            type: 'input',
-            name: 'last_name',
-            message: 'What is the last name?'
-        },
-        {
-            type: 'list',
-            name: 'role_id',
-            message: 'What is the role?',
-            choices: data
-        },
-        {
-            type: 'input',
-            name: 'manager_id',
-            message: 'What is the manager?'
-        }
-    ]).then(data => {
-        insertEmployee(data)
-    })
-    // }).then( ()=>menuOption() )
-}).then( ()=>menuOption() )
+        db.getAllRoles().then(([data]) => {
+            let roles = data;
+            const roleChoices = roles.map(({id, title}) => ({
+                name: title,
+                value: id
+            }))
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'first_name',
+                    message: 'What is the first name?'
+                },
+                {
+                    type: 'input',
+                    name: 'last_name',
+                    message: 'What is the last name?'
+                },
+                {
+                    type: 'list',
+                    name: 'role_id',
+                    message: 'What is the role?',
+                    choices: roleChoices
+                },
+                {
+                    // type: 'input',
+                    type: 'list', 
+                    name: 'manager_id',
+                    message: 'What is the manager?',
+                    choices:  mngrChoices,
+                    default: 0 // null
+                }
+            ]).then(data => {
+                insertEmployee(data).then(() => menuOption())
+                
+            })
+        })
+    })}
 
-}
-*/
+
+
+
 
 
 function addRoles() {

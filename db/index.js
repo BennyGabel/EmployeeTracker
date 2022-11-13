@@ -19,6 +19,13 @@ function getAllRoles() {
     )
 }
 
+function getManagers() {
+    return connection.promise().query(
+        "SELECT id, last_name from employee where manager_id=0;"
+        // "select first_name │ last_name │ role_id │ manager_id 
+    )
+}
+
 function getAllDepartment() {
     return connection.promise().query(
         "SELECT * FROM department;"
@@ -59,5 +66,5 @@ function vRole(nRole) {
 
 
 // If am exporting more than one fuction, HAVE to WRAP IT as OBJECTS
-module.exports = {getAllEmployees, getAllRoles, getAllDepartment, insertEmployee, insertRole, insertDepartment, vRole}
+module.exports = {getAllEmployees, getAllRoles, getAllDepartment, insertEmployee, insertRole, insertDepartment, vRole, getManagers}
 // module.exports = {getAllEmployees, getAllRoles, getAllDepartment, insertEmployee, insertRole, insertDepartment}
