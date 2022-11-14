@@ -23,7 +23,8 @@ function getAllRoles() {
     // console.log(connection);
     
     return connection.promise().query(
-        "SELECT role.id, role.title, role.salary FROM role;"
+        // "SELECT role.id, role.title, role.salary FROM role;"
+        "SELECT r.id, d.name as department, r.title, r.salary FROM role r JOIN department d on r.department_id=d.id;"
     )
 }
 
