@@ -148,11 +148,19 @@ function addEmployee() {
 
 
 
-
-
-
 function addRoles() {
-    inquirer.prompt([
+
+    // type: 'input',
+    // name: 'department_id',
+    // message: 'What is the department?'
+
+    db.getAllDepartment().then(([data]) => {
+            let depa = data;
+            const deptChoices = depa.map(({id, name}) => ({
+                name: name,
+                value: id
+            }))
+            inquirer.prompt([   
         {
             type: 'input',
             name: 'title',
@@ -164,14 +172,41 @@ function addRoles() {
             message: 'What is the salary?'
         },
         {
-            type: 'input',
+            type: 'list',
             name: 'department_id',
-            message: 'What is the department?'
+            message: 'What is the department?',
+            choices: deptChoices 
         }
     ]).then(data => {
         insertRole(data)
     }).then(() => menuOption())
 }
+)}
+        
+
+
+
+// function addRoles() {
+//     inquirer.prompt([
+//         {
+//             type: 'input',
+//             name: 'title',
+//             message: 'What is the title?'
+//         },
+//         {
+//             type: 'input',
+//             name: 'salary',
+//             message: 'What is the salary?'
+//         },
+//         {
+//             type: 'input',
+//             name: 'department_id',
+//             message: 'What is the department?'
+//         }
+//     ]).then(data => {
+//         insertRole(data)
+//     }).then(() => menuOption())
+// }
 
 
 
