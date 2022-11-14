@@ -5,9 +5,18 @@ const connection = require('./connection')
 
 function getAllEmployees() {
     // console.log("db/index   getAllEmployees")
+    // "SELECT * FROM employee;"
+
+    // "select e.first_name, e.last_name, r.title, d.name as department, r.salary from (employee e join role r on e.role_id=r.id) JOIN department d on r.department_id=d.id;"
+    // "select e.first_name, e.last_name, r.title, d.name as department, r.salary, m.last_name   JOIN LEFT employee m on e.manager_id=m.id"
+
     return connection.promise().query(
-        "SELECT * FROM employee;"
-    )
+        "select e.first_name, e.last_name, r.title, d.name as department, r.salary, e.manager_id from (employee e join role r on e.role_id=r.id) JOIN department d on r.department_id=d.id;"
+        
+        // (select concat(last_name, ' ', first_name) as manager from employee where e.id=manager_id
+        //  from (employee e join role r on e.role_id=r.id) JOIN department d on r.department_id=d.id;"
+        // concat(last_name, ' ', first_name) as mgr
+        )
 }
 
 function getAllRoles() {
@@ -21,9 +30,9 @@ function getAllRoles() {
 
 function getManagers() {
     return connection.promise().query(
-        "select concat(last_name, ' ', first_name) as manager from employee where manager_id=0;" 
         // "SELECT id, last_name from employee where manager_id=0;"
-        
+        "select id, concat(last_name, ' ', first_name) as mgr from employee where manager_id=0;" 
+        // "select id, last_name, first_name from employee where manager_id=0;" 
     )
 }
 

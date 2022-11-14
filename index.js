@@ -97,12 +97,17 @@ function viewDepartments() {
 function addEmployee() {
     db.getManagers().then(([aryMan]) => {
         let manager = aryMan;
-        // const mngrChoices = manager.map(({id, last_name}) => ({
-        const mngrChoices = manager.map(({id, manager}) => ({
-        // name:  last_name,
-        name: manager, 
+
+        // console.log(manager)
+
+        const mngrChoices = manager.map(({id, mgr }) => ({
+
+        // last: last_name,
+        name: mgr,   // first_name, 
         value: id
     }))
+    mngrChoices.push({name:'None', value: 0})
+    console.log(mngrChoices)
         db.getAllRoles().then(([data]) => {
             let roles = data;
             const roleChoices = roles.map(({id, title}) => ({
