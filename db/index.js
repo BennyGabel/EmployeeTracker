@@ -11,11 +11,10 @@ function getAllEmployees() {
     // "select e.first_name, e.last_name, r.title, d.name as department, r.salary, m.last_name   JOIN LEFT employee m on e.manager_id=m.id"
 
     return connection.promise().query(
-        "select e.first_name, e.last_name, r.title, d.name as department, r.salary, e.manager_id from (employee e join role r on e.role_id=r.id) JOIN department d on r.department_id=d.id;"
-        
-        // (select concat(last_name, ' ', first_name) as manager from employee where e.id=manager_id
-        //  from (employee e join role r on e.role_id=r.id) JOIN department d on r.department_id=d.id;"
-        // concat(last_name, ' ', first_name) as mgr
+        // "select e.first_name, e.last_name, r.title, d.name as department, r.salary, e.manager_id from (employee e join role r on e.role_id=r.id) JOIN department d on r.department_id=d.id;"
+        // "select e.first_name, e.last_name, r.title, d.name as department, r.salary, concat(m.last_name, ', ', m.first_name)  as manager from (employee e join role r on e.role_id=r.id) join (employee e left join employee m on e.manager_id=m.id);"
+
+        "select e.first_name, e.last_name, r.title, d.name as department, r.salary, concat(m.last_name, ', ', m.first_name)  as manager from (employee e left join role r on e.role_id=r.id JOIN department d on r.department_id=d.id) left join employee m on e.manager_id=m.id;" 
         )
 }
 
