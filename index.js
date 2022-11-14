@@ -19,8 +19,6 @@ const { getAllEmployees, getAllDepartment, getAllRoles, insertEmployee, insertRo
 // import { getAllEmployees, getAllRoles, getAllDepartment } from './db';   //     from './db'   means ./db/index
 
 
-//just for inquirer
-
 function menuOption() {
     inquirer.prompt([{
         type: 'list',
@@ -31,7 +29,6 @@ function menuOption() {
     ]).then(data => {
         let choice = data.myList
         console.log(choice)
-        // console.log("** " + data + " **")
         switch (choice) {
             case 'View All Employees':
                 viewEmployees()
@@ -46,7 +43,6 @@ function menuOption() {
                 addEmployee()
                 break
             case 'Add Roles':
-                console.log("add role")
                 addRoles()
                 break
             case 'Add Departmensts':
@@ -60,8 +56,6 @@ function menuOption() {
 }
 
 function viewEmployees() {
-    // getAllEmployees().then((data) => { console.log(data) }).then( ()=>menuOption() )
-    // getAllEmployees().then((data) => { console.log(data) })
     db.getAllEmployees()
         .then(([data]) => {
             let employee = data;
@@ -91,8 +85,7 @@ function viewDepartments() {
         .then(() => menuOption())
 }
 
-// Working
-// Testing BEG
+
 // async/await
 function addEmployee() {
     db.getManagers().then(([aryMan]) => {
@@ -107,7 +100,7 @@ function addEmployee() {
         value: id
     }))
     mngrChoices.push({name:'None', value: 0})
-    console.log(mngrChoices)
+    // console.log(mngrChoices)
         db.getAllRoles().then(([data]) => {
             let roles = data;
             const roleChoices = roles.map(({id, title}) => ({
@@ -182,33 +175,6 @@ function addRoles() {
     }).then(() => menuOption())
 }
 )}
-        
-
-
-
-// function addRoles() {
-//     inquirer.prompt([
-//         {
-//             type: 'input',
-//             name: 'title',
-//             message: 'What is the title?'
-//         },
-//         {
-//             type: 'input',
-//             name: 'salary',
-//             message: 'What is the salary?'
-//         },
-//         {
-//             type: 'input',
-//             name: 'department_id',
-//             message: 'What is the department?'
-//         }
-//     ]).then(data => {
-//         insertRole(data)
-//     }).then(() => menuOption())
-// }
-
-
 
 
 function addDepartment() {
