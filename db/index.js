@@ -28,11 +28,28 @@ function getAllRoles() {
     )
 }
 
+function updEmplRole(updData) {
+    console.log(updData)
+
+    return connection.promise().query(
+        // "SELECT role.id, role.title, role.salary FROM role;"
+        `UPDATE employee SET role_id=${updData.role_id} WHERE id=${updData.employeeId}`
+
+        // }.id, d.name as department, r.title, r.salary FROM role r JOIN department d on r.department_id=d.id;`
+    )
+}
+
 function getManagers() {
     return connection.promise().query(
         // "SELECT id, last_name from employee where manager_id=0;"
         "select id, concat(last_name, ' ', first_name) as mgr from employee where manager_id=0;" 
         // "select id, last_name, first_name from employee where manager_id=0;" 
+    )
+}
+
+function getEmployees() {
+    return connection.promise().query(
+        "select id, concat(last_name, ' ', first_name) as fullname from employee;" 
     )
 }
 
@@ -76,5 +93,5 @@ function vRole(nRole) {
 
 
 // If am exporting more than one fuction, HAVE to WRAP IT as OBJECTS
-module.exports = {getAllEmployees, getAllRoles, getAllDepartment, insertEmployee, insertRole, insertDepartment, vRole, getManagers}
+module.exports = {getAllEmployees, getAllRoles, getAllDepartment, insertEmployee, insertRole, insertDepartment, vRole, getManagers, getEmployees, updEmplRole}
 // module.exports = {getAllEmployees, getAllRoles, getAllDepartment, insertEmployee, insertRole, insertDepartment}

@@ -15,6 +15,7 @@ CREATE TABLE role (
     CONSTRAINT fk_dept FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE
 );
 
+
 CREATE TABLE employee(
     id             INTEGER AUTO_INCREMENT PRIMARY KEY,
     first_name     VARCHAR(30),
