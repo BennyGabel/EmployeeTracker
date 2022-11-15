@@ -3,7 +3,7 @@
 ## Description
   Create and view employer information: Department, Role, Employee
   
-  
+
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
@@ -29,6 +29,8 @@ node index.js
 ![Application](assets/screenshots/View_all_Roles.jpg?raw=true)
 
 ![Application](assets/screenshots/View_all_Employees.jpg?raw=true)
+
+![Application](assets/screenshots/Add_Employee_&_Update_Role.jpg?raw=true)
 
 
 ## Credits

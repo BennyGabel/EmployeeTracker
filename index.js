@@ -223,62 +223,7 @@ function updRole() {
                 updEmplRole(data).then(() => menuOption())})})})}
 
     
-/* Start
 
-getEmployees() {
-    return connection.promise().query(
-        "select id, concat(last_name, ' ', first_name) as employees
-
-
-db.getManagers().then(([aryMan]) => {
-        let manager = aryMan;
-
-        const mngrChoices = manager.map(({id, mgr }) => ({
-
-        // last: last_name,
-        name: mgr,   // first_name, 
-        value: id
-    }))
-    mngrChoices.push({name:'None', value: 0})
-        db.getAllRoles().then(([data]) => {
-            let roles = data;
-            const roleChoices = roles.map(({id, title}) => ({
-                name: title,
-                value: id
-            }))
-            inquirer.prompt([
-                {
-                    type: 'input',
-                    name: 'first_name',
-                    message: 'What is the first name?'
-                },
-                {
-                    type: 'input',
-                    name: 'last_name',
-                    message: 'What is the last name?'
-                },
-                {
-                    type: 'list',
-                    name: 'role_id',
-                    message: 'What is the role?',
-                    choices: roleChoices
-                },
-                {
-                    // type: 'input',
-                    type: 'list', 
-                    name: 'manager_id',
-                    message: 'What is the manager?',
-                    choices:  mngrChoices,
-                    default: 0 // null
-                }
-            ]).then(data => {
-                insertEmployee(data).then(() => menuOption())
-                
-            })
-        })
-    })}
-
-End */ 
 
 
 
