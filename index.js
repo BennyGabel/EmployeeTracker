@@ -19,6 +19,8 @@ const { getAllEmployees, getAllDepartment, getAllRoles, insertEmployee, insertRo
 // import { getAllEmployees, getAllRoles, getAllDepartment } from './db';   //     from './db'   means ./db/index
 
 
+
+// Menu Option
 function menuOption() {
     inquirer.prompt([{
         type: 'list',
@@ -88,6 +90,7 @@ function viewDepartments() {
 
 // async/await
 function addEmployee() {
+    // Get Manager's Full Name and Id
     db.getManagers().then(([aryMan]) => {
         let manager = aryMan;
 
@@ -97,6 +100,7 @@ function addEmployee() {
         name: mgr,   // first_name, 
         value: id
     }))
+    // Insert a (non Manager)
     mngrChoices.push({name:'None', value: 0})
         db.getAllRoles().then(([data]) => {
             let roles = data;
@@ -139,11 +143,7 @@ function addEmployee() {
 
 
 function addRoles() {
-
-    // type: 'input',
-    // name: 'department_id',
-    // message: 'What is the department?'
-
+    // Get Department list (id, name)
     db.getAllDepartment().then(([data]) => {
             let depa = data;
             const deptChoices = depa.map(({id, name}) => ({
@@ -189,6 +189,7 @@ function addDepartment() {
 
 
 function updRole() {
+    // Get All Employees (id, FullName)
     db.getEmployees().then(([aryEmpl]) => {
         let employfl = aryEmpl;
 
@@ -199,6 +200,7 @@ function updRole() {
         value: id
     }))
 
+    // Get All Roles (Role id, Title)
     db.getAllRoles().then(([data]) => {
         let roles = data;
         const roleChoices = roles.map(({id, title}) => ({
@@ -220,14 +222,11 @@ function updRole() {
                 choices: roleChoices
             }]).then(data => {
                 console.log(data)
-                updEmplRole(data).then(() => menuOption())})})})}
-
-    
-
-
-
-
-
+                updEmplRole(data).then(() => menuOption())
+                })
+        })
+    })
+}
 
 
 menuOption()
